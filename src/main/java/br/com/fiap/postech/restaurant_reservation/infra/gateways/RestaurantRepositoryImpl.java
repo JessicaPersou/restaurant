@@ -2,10 +2,13 @@ package br.com.fiap.postech.restaurant_reservation.infra.gateways;
 
 import br.com.fiap.postech.restaurant_reservation.application.gateway.RestaurantRepository;
 import br.com.fiap.postech.restaurant_reservation.domain.entities.Restaurant;
+import br.com.fiap.postech.restaurant_reservation.infra.controller.dto.FilterRestaurant;
 import br.com.fiap.postech.restaurant_reservation.infra.persistense.JpaRestaurantRepository;
 import br.com.fiap.postech.restaurant_reservation.infra.persistense.RestaurantData;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class RestaurantRepositoryImpl implements RestaurantRepository {
@@ -25,5 +28,18 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
         restaurantData = jpaRestaurantRepository.save(restaurantData);
         return modelMapper.map(restaurantData, Restaurant.class);
     }
+
+    @Override
+    public List<Restaurant> findRestaurantByFilters(FilterRestaurant filter) {
+        List<RestaurantData> restaurantList = jpaRestaurantRepository.findRestaurantDataByNameOrLocationOrCuisine
+                (filter.getName(), filter.getLocation(), filter.getCuisine());
+        if (restaurantList.isEmpty()) {
+            return List.of();
+        }
+        return restaurantList.stream()
+                .map(restaurantData ->
+                modelMapper.map(restaurantData, Restaurant.class)).toList();
+    }
+
 }
 

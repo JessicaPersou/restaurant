@@ -19,7 +19,7 @@ public class RestaurantData {
     private Long id;
     private String name;
     private String location;
-    @Column(name = "cousine_type")
+    @Column(name = "cusine_type")
     private CuisineType cuisine;
     @Column(name = "opening_hours")
     private LocalTime openingHours;
