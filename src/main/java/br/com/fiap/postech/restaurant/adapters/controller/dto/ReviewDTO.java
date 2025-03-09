@@ -1,23 +1,21 @@
-package br.com.fiap.postech.restaurant.infra.controller.dto;
+package br.com.fiap.postech.restaurant.adapters.controller.dto;
 
 import br.com.fiap.postech.restaurant.domain.entities.Restaurant;
 import br.com.fiap.postech.restaurant.domain.entities.User;
-import br.com.fiap.postech.restaurant.domain.enums.Status;
-import java.time.LocalDateTime;
 import lombok.*;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ReservationDTO {
+public class ReviewDTO {
     private Long id;
     private User user;
     private Restaurant restaurant;
-    private LocalDateTime reservationDate;
-    private int numberOfPeople;
-    private Status status;
+    private int rating;
+    private String comment;
+    private LocalDateTime reviewDate;
 }
-
-

@@ -1,10 +1,10 @@
-package br.com.fiap.postech.restaurant.infra.gateways;
+package br.com.fiap.postech.restaurant.adapters.gateways;
 
+import br.com.fiap.postech.restaurant.adapters.controller.dto.FilterRestaurantDTO;
+import br.com.fiap.postech.restaurant.adapters.persistense.JpaRestaurantRepository;
+import br.com.fiap.postech.restaurant.adapters.persistense.RestaurantData;
 import br.com.fiap.postech.restaurant.application.gateway.RestaurantRepository;
 import br.com.fiap.postech.restaurant.domain.entities.Restaurant;
-import br.com.fiap.postech.restaurant.infra.controller.dto.FilterRestaurantDTO;
-import br.com.fiap.postech.restaurant.infra.persistense.JpaRestaurantRepository;
-import br.com.fiap.postech.restaurant.infra.persistense.RestaurantData;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
@@ -30,6 +30,14 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
     }
 
     @Override
+    public Restaurant findById(Long id){
+        RestaurantData restaurantData = jpaRestaurantRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Restaurant not found with id: " + id));
+        return modelMapper.map(restaurantData, Restaurant.class);
+    }
+
+
+    @Override
     public List<Restaurant> findRestaurantByFilters(FilterRestaurantDTO filter) {
         List<RestaurantData> restaurantList = jpaRestaurantRepository.findRestaurantDataByNameOrLocationOrCuisine
                 (filter.getName(), filter.getLocation(), filter.getCuisine());
@@ -38,7 +46,14 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
         }
         return restaurantList.stream()
                 .map(restaurantData ->
-                modelMapper.map(restaurantData, Restaurant.class)).toList();
+                        modelMapper.map(restaurantData, Restaurant.class)).toList();
+    }
+
+    @Override
+    public int getCapacity(Long restaurantId) {
+        RestaurantData restaurantData = jpaRestaurantRepository.findById(restaurantId)
+                .orElseThrow(() -> new IllegalArgumentException("Restaurante não encontrado"));
+        return restaurantData.getCapacity();
     }
 
 }

@@ -1,7 +1,5 @@
 package br.com.fiap.postech.restaurant.domain.entities;
 
-import br.com.fiap.postech.restaurant.domain.enums.Status;
-
 import java.time.LocalDateTime;
 
 public class Review {
@@ -12,7 +10,8 @@ public class Review {
     private String comment;
     private LocalDateTime reviewDate;
 
-    public Review() {}
+    public Review() {
+    }
 
     public Review(Long id, User user, Restaurant restaurant,
                   int rating, String comment, LocalDateTime reviewDate) {

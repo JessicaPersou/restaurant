@@ -12,7 +12,8 @@ public class Reservation {
     private int numberOfPeople;
     private Status status;
 
-    public Reservation() {}
+    public Reservation() {
+    }
 
     public Reservation(Long id, User user, Restaurant restaurant, LocalDateTime reservationDate, int numberOfPeople, Status status) {
         this.id = id;

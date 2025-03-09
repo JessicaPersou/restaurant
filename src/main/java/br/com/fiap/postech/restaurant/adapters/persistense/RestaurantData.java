@@ -1,4 +1,4 @@
-package br.com.fiap.postech.restaurant.infra.persistense;
+package br.com.fiap.postech.restaurant.adapters.persistense;
 
 import br.com.fiap.postech.restaurant.domain.enums.CuisineType;
 import jakarta.persistence.*;

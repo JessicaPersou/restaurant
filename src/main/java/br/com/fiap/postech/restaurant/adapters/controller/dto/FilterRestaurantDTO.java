@@ -1,11 +1,12 @@
-package br.com.fiap.postech.restaurant.infra.controller.dto;
+package br.com.fiap.postech.restaurant.adapters.controller.dto;
 
 public class FilterRestaurantDTO {
     private String name;
     private String location;
     private String cuisine;
 
-    public FilterRestaurantDTO(){}
+    public FilterRestaurantDTO() {
+    }
 
     public FilterRestaurantDTO(String name, String location, String cuisine) {
         this.name = name;

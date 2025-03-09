@@ -1,4 +1,4 @@
-package br.com.fiap.postech.restaurant.infra.persistense;
+package br.com.fiap.postech.restaurant.adapters.persistense;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

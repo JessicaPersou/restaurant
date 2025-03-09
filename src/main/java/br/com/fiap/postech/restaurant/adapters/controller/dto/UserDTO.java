@@ -1,9 +1,11 @@
-package br.com.fiap.postech.restaurant.domain.entities;
+package br.com.fiap.postech.restaurant.adapters.controller.dto;
+
+import br.com.fiap.postech.restaurant.domain.entities.Reservation;
+import br.com.fiap.postech.restaurant.domain.entities.Review;
 
 import java.util.List;
 
-
-public class User {
+public class UserDTO {
     private Long id;
     private String name;
     private String email;
@@ -11,11 +13,10 @@ public class User {
     private List<Reservation> reservations;
     private List<Review> reviews;
 
-    public User() {
+    public UserDTO() {
     }
 
-    public User(Long id, String name, String email, String phone,
-                List<Reservation> reservations, List<Review> reviews) {
+    public UserDTO(Long id, String name, String email, String phone, List<Reservation> reservations, List<Review> reviews) {
         this.id = id;
         this.name = name;
         this.email = email;

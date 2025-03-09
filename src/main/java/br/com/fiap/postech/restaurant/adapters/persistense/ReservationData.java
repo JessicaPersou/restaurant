@@ -1,7 +1,9 @@
-package br.com.fiap.postech.restaurant.infra.persistense;
+package br.com.fiap.postech.restaurant.adapters.persistense;
 
+import br.com.fiap.postech.restaurant.domain.enums.Status;
 import jakarta.persistence.*;
 import lombok.*;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -10,7 +12,7 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ReviewData {
+public class ReservationData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,8 +22,9 @@ public class ReviewData {
     @ManyToOne
     @JoinColumn(name = "restaurant_id", nullable = false)
     private RestaurantData restaurant;
-    private int rating;
-    private String comment;
-    @Column(name = "review_date")
-    private LocalDateTime reviewDate;
+    @Column(name = "reservation_date")
+    private LocalDateTime reservationDate;
+    @Column(name = "number_of_people")
+    private int numberOfPeople;
+    private Status status;
 }

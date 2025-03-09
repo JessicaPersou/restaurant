@@ -1,8 +1,5 @@
-package br.com.fiap.postech.restaurant.infra.persistense;
+package br.com.fiap.postech.restaurant.adapters.persistense;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.*;
 import lombok.*;
 
