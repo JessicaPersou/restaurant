@@ -9,8 +9,7 @@ import java.util.List;
 @Repository
 public interface ReservationRepository {
     Reservation save(Reservation reservation);
-
-    //    Reservation findById(Long id);
+//    Reservation findById(Long id);
     List<Reservation> findByRestaurantAndDate(Long restaurantId, LocalDateTime date);
 //    void delete(Long id);
 }

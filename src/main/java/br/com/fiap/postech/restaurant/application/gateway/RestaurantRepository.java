@@ -11,6 +11,5 @@ public interface RestaurantRepository {
     Restaurant save(Restaurant restaurant);
     Restaurant findById(Long id);
     List<Restaurant> findRestaurantByFilters(FilterRestaurantDTO filter);
-
     int getCapacity(Long restaurantId);
 }

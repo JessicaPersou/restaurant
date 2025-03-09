@@ -15,6 +15,10 @@ public class Reservation {
     public Reservation() {
     }
 
+    public Reservation(Long id){
+        this.id = id;
+    }
+
     public Reservation(Long id, User user, Restaurant restaurant, LocalDateTime reservationDate, int numberOfPeople, Status status) {
         this.id = id;
         this.user = user;
@@ -36,7 +40,7 @@ public class Reservation {
         return user;
     }
 
-    public void setUserId(User user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

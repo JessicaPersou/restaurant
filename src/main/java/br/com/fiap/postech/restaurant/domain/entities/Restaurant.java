@@ -20,14 +20,17 @@ public class Restaurant {
     }
 
     public Restaurant() {
-
     }
 
-    public Restaurant(String name, String location, CuisineType cuisineType,
+    public Restaurant(Long id){
+        this.id = id;
+    }
+
+    public Restaurant(Long id, String name, String location, CuisineType cuisineType,
                       LocalTime openingHours, int capacity, List<Reservation> reservations, List<Review> reviews) {
         if (name == null || name.isBlank()) throw new IllegalArgumentException("Nome inválido");
         if (capacity <= 0) throw new IllegalArgumentException("Capacidade deve ser positiva");
-
+        this.id = id;
         this.name = name;
         this.location = location;
         this.cuisine = cuisineType;

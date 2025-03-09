@@ -28,4 +28,8 @@ public class RestaurantData {
     private List<ReservationData> reservations;
     @OneToMany(mappedBy = "restaurant")
     private List<ReviewData> reviews;
+
+    public int getCapacity() {
+        return capacity;
+    }
 }
