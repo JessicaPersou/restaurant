@@ -9,7 +9,14 @@ import java.util.List;
 @Repository
 public interface RestaurantRepository {
     Restaurant save(Restaurant restaurant);
+
     Restaurant findById(Long id);
-    List<Restaurant> findRestaurantByFilters(FilterRestaurantDTO filter);
+
+    List<Restaurant> findAll();
+
     int getCapacity(Long restaurantId);
+
+    List<Restaurant> findRestaurantByFilters(FilterRestaurantDTO filters);
+
+    void delete(Long id);
 }

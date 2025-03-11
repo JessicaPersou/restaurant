@@ -11,6 +11,8 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "review")
+
 public class ReviewData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

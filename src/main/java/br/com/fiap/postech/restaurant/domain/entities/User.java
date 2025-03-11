@@ -1,5 +1,6 @@
 package br.com.fiap.postech.restaurant.domain.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -8,13 +9,13 @@ public class User {
     private String name;
     private String email;
     private String phone;
-    private List<Reservation> reservations;
-    private List<Review> reviews;
+    private List<Reservation> reservations = new ArrayList<>();
+    private List<Review> reviews = new ArrayList<>();
 
     public User() {
     }
 
-    public User(Long id){
+    public User(Long id) {
         this.id = id;
     }
 
@@ -24,8 +25,8 @@ public class User {
         this.name = name;
         this.email = email;
         this.phone = phone;
-        this.reservations = reservations;
-        this.reviews = reviews;
+        this.reservations = reservations != null ? reservations : new ArrayList<>();
+        this.reviews = reviews != null ? reviews : new ArrayList<>();
     }
 
     public Long getId() {

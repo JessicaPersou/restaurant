@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class ReservationRepositoryImpl implements ReservationRepository {
@@ -21,17 +22,65 @@ public class ReservationRepositoryImpl implements ReservationRepository {
         this.modelMapper = modelMapper;
     }
 
-
     @Override
     public Reservation save(Reservation reservation) {
         ReservationData reservationData;
         reservationData = modelMapper.map(reservation, ReservationData.class);
-        jpaReservationRepository.save(reservationData);
+        reservationData = jpaReservationRepository.save(reservationData);
         return modelMapper.map(reservationData, Reservation.class);
     }
 
     @Override
     public List<Reservation> findByRestaurantAndDate(Long restaurantId, LocalDateTime date) {
-        return jpaReservationRepository.findByRestaurantAndDate(restaurantId, date);
+        List<ReservationData> reservations = jpaReservationRepository.findByRestaurantIdAndReservationDate(restaurantId, date);
+        return reservations.stream()
+                .map(reservationData -> modelMapper.map(reservationData, Reservation.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Reservation findById(Long id) {
+        ReservationData reservationData = jpaReservationRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Reservation not found with id: " + id));
+        return modelMapper.map(reservationData, Reservation.class);
+    }
+
+    @Override
+    public List<Reservation> findByUserId(Long userId) {
+        List<ReservationData> reservations = jpaReservationRepository.findByUserId(userId);
+        return reservations.stream()
+                .map(reservationData -> modelMapper.map(reservationData, Reservation.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Reservation> findByRestaurantId(Long restaurantId) {
+        List<ReservationData> reservations = jpaReservationRepository.findByRestaurantId(restaurantId);
+        return reservations.stream()
+                .map(reservationData -> modelMapper.map(reservationData, Reservation.class))
+                .collect(Collectors.toList());
+    }
+
+
+    @Override
+    public List<Reservation> findByDateRange(LocalDateTime start, LocalDateTime end) {
+        List<ReservationData> reservations = jpaReservationRepository.findByReservationDateBetween(start, end);
+        return reservations.stream()
+                .map(reservationData -> modelMapper.map(reservationData, Reservation.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Reservation> findByDateRangeAndRestaurant(LocalDateTime start, LocalDateTime end, Long restaurantId) {
+        List<ReservationData> reservations = jpaReservationRepository.findByReservationDateBetweenAndRestaurantId(
+                start, end, restaurantId);
+        return reservations.stream()
+                .map(reservationData -> modelMapper.map(reservationData, Reservation.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public void delete(Long id) {
+        jpaReservationRepository.deleteById(id);
     }
 }

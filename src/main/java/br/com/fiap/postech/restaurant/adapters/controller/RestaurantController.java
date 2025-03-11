@@ -54,7 +54,7 @@ public class RestaurantController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<RestaurantDTO> restaurantById(@PathVariable Long id){
+    public ResponseEntity<RestaurantDTO> restaurantById(@PathVariable Long id) {
         Restaurant find = findRestaurantUseCase.find(id);
         RestaurantDTO dto = modelMapper.map(find, RestaurantDTO.class);
         return ResponseEntity.status(HttpStatus.OK).body(dto);

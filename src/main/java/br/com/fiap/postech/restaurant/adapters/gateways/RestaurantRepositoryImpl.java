@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class RestaurantRepositoryImpl implements RestaurantRepository {
@@ -30,12 +31,11 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
     }
 
     @Override
-    public Restaurant findById(Long id){
+    public Restaurant findById(Long id) {
         RestaurantData restaurantData = jpaRestaurantRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Restaurant not found with id: " + id));
         return modelMapper.map(restaurantData, Restaurant.class);
     }
-
 
     @Override
     public List<Restaurant> findRestaurantByFilters(FilterRestaurantDTO filter) {
@@ -54,6 +54,19 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
         RestaurantData restaurantData = jpaRestaurantRepository.findById(restaurantId)
                 .orElseThrow(() -> new IllegalArgumentException("Restaurante não encontrado"));
         return restaurantData.getCapacity();
+    }
+
+    @Override
+    public List<Restaurant> findAll() {
+        List<RestaurantData> restaurants = jpaRestaurantRepository.findAll();
+        return restaurants.stream()
+                .map(restaurantData -> modelMapper.map(restaurantData, Restaurant.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public void delete(Long id) {
+        jpaRestaurantRepository.deleteById(id);
     }
 
 }

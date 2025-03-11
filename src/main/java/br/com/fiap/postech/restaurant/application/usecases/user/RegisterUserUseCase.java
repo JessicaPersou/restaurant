@@ -14,10 +14,30 @@ public class RegisterUserUseCase {
     }
 
     public User create(User user) {
-        if (user.getEmail() == null) {
-            throw new RuntimeException("email vazio");
+        if (user == null) {
+            throw new IllegalArgumentException("Dados do usuário são obrigatórios");
         }
-        ;
+
+        if (user.getName() == null || user.getName().isBlank()) {
+            throw new IllegalArgumentException("Nome do usuário é obrigatório");
+        }
+
+        if (user.getEmail() == null || user.getEmail().isBlank()) {
+            throw new IllegalArgumentException("Email do usuário é obrigatório");
+        }
+
+        // Basic email validation
+        if (!user.getEmail().matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
+            throw new IllegalArgumentException("Formato de email inválido");
+        }
+
+        // Check if user with same email already exists
+        // This assumes userRepository has a method to find by email
+        // User existingUser = userRepository.findByEmail(user.getEmail());
+        // if (existingUser != null) {
+        //     throw new IllegalArgumentException("Usuário com este email já está cadastrado");
+        // }
+
         return userRepository.save(user);
     }
 }

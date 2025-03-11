@@ -12,10 +12,17 @@ public class Reservation {
     private int numberOfPeople;
     private Status status;
 
+    // Adicionado metodo para verificar se está dentro do horário de funcionamento
+    public boolean isWithinBusinessHours() {
+        return this.restaurant != null &&
+                this.reservationDate != null &&
+                this.restaurant.isOpenAt(this.reservationDate);
+    }
+
     public Reservation() {
     }
 
-    public Reservation(Long id){
+    public Reservation(Long id) {
         this.id = id;
     }
 
@@ -75,4 +82,5 @@ public class Reservation {
     public void setStatus(Status status) {
         this.status = status;
     }
+
 }

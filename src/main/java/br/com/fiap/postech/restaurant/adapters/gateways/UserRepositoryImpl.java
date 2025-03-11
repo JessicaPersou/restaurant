@@ -7,6 +7,9 @@ import br.com.fiap.postech.restaurant.domain.entities.User;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class UserRepositoryImpl implements UserRepository {
 
@@ -28,7 +31,29 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User findById(Long id) {
-        UserData userData = jpaUserRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("User not found with id: "+ id));
+        UserData userData = jpaUserRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("User not found with id: " + id));
         return modelMapper.map(userData, User.class);
     }
+
+    @Override
+    public User findByEmail(String email) {
+        UserData userData = jpaUserRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("User not found with email: " + email));
+        return modelMapper.map(userData, User.class);
+    }
+
+    @Override
+    public List<User> searchUsers(String searchTerm) {
+        List<UserData> users = jpaUserRepository.findByNameContainingOrEmailContaining(searchTerm, searchTerm);
+        return users.stream()
+                .map(userData -> modelMapper.map(userData, User.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public void delete(Long id) {
+        jpaUserRepository.deleteById(id);
+    }
+
 }

@@ -9,4 +9,6 @@ public interface JpaRestaurantRepository extends JpaRepository<RestaurantData, L
 
     @Query("SELECT r FROM RestaurantData r WHERE r.name = :name OR r.location = :location OR CAST(r.cuisine AS string) = :cuisine")
     List<RestaurantData> findRestaurantDataByNameOrLocationOrCuisine(String name, String location, String cuisine);
+
+    boolean existsByNameAndLocation(String name, String location);
 }
