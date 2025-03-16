@@ -16,15 +16,10 @@ public class FindUserUseCase {
     }
 
     public User findById(Long id) {
-        if (id == null) {
-            throw new IllegalArgumentException("ID do usuário é obrigatório");
-        }
-
         User user = userRepository.findById(id);
         if (user == null) {
             throw new RuntimeException("Usuário não encontrado com o ID: " + id);
         }
-
         return user;
     }
 
@@ -32,12 +27,10 @@ public class FindUserUseCase {
         if (email == null || email.isBlank()) {
             throw new IllegalArgumentException("Email do usuário é obrigatório");
         }
-
         User user = userRepository.findByEmail(email);
         if (user == null) {
             throw new RuntimeException("Usuário não encontrado com o email: " + email);
         }
-
         return user;
     }
 
@@ -52,21 +45,17 @@ public class FindUserUseCase {
     public UserProfileDTO getUserProfile(Long userId) {
         User user = findById(userId);
 
-        // Supondo que você tenha um DTO para perfil de usuário
         UserProfileDTO profileDTO = new UserProfileDTO();
         profileDTO.setId(user.getId());
         profileDTO.setName(user.getName());
         profileDTO.setEmail(user.getEmail());
         profileDTO.setPhone(user.getPhone());
 
-        // Contando estatísticas do usuário
         int reservationCount = user.getReservations().size();
         int reviewCount = user.getReviews().size();
 
         profileDTO.setReservationCount(reservationCount);
         profileDTO.setReviewCount(reviewCount);
-
-        // Se quiser, pode calcular outras estatísticas, como restaurantes mais visitados
 
         return profileDTO;
     }

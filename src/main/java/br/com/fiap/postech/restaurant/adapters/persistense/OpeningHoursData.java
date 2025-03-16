@@ -10,7 +10,6 @@ import java.time.LocalTime;
 @Entity
 @Getter
 @Setter
-@Table(name = "opening_hours")
 public class OpeningHoursData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

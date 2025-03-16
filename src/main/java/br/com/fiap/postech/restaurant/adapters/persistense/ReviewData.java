@@ -3,7 +3,7 @@ package br.com.fiap.postech.restaurant.adapters.persistense;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -11,20 +11,19 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "review")
-
 public class ReviewData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private UserData user;
-    @ManyToOne
-    @JoinColumn(name = "restaurant_id", nullable = false)
-    private RestaurantData restaurant;
+    private String reviewText;
     private int rating;
-    private String comment;
-    @Column(name = "review_date")
-    private LocalDateTime reviewDate;
+    private LocalDate reviewDate;
+
+    @ManyToOne
+    @JoinColumn(name = "restaurant_id")
+    private RestaurantData restaurant;
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private CustomerData customer; // Assumindo que existe uma classe CustomerData
 }

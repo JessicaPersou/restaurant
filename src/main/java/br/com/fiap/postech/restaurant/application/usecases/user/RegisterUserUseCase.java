@@ -26,18 +26,9 @@ public class RegisterUserUseCase {
             throw new IllegalArgumentException("Email do usuário é obrigatório");
         }
 
-        // Basic email validation
         if (!user.getEmail().matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
             throw new IllegalArgumentException("Formato de email inválido");
         }
-
-        // Check if user with same email already exists
-        // This assumes userRepository has a method to find by email
-        // User existingUser = userRepository.findByEmail(user.getEmail());
-        // if (existingUser != null) {
-        //     throw new IllegalArgumentException("Usuário com este email já está cadastrado");
-        // }
-
         return userRepository.save(user);
     }
 }

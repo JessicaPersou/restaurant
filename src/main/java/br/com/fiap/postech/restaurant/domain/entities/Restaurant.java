@@ -19,6 +19,9 @@ public class Restaurant {
     private List<Reservation> reservations = new ArrayList<>();
     private List<Review> reviews = new ArrayList<>();
 
+    public Restaurant(long l, String s, int i, Object o) {
+    }
+
     // Metodo para verificar se está aberto em determinado horário
     public boolean isOpenAt(LocalDateTime dateTime) {
         if (dateTime == null || openingHours == null || openingHours.isEmpty()) {

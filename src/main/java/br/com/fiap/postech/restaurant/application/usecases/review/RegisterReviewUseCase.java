@@ -57,7 +57,6 @@ public class RegisterReviewUseCase {
             throw new IllegalArgumentException("Restaurante não encontrado");
         }
 
-        // Verifica se o usuário já avaliou o restaurante
         boolean hasReviewed = reviewRepository.hasUserReviewedRestaurant(
                 reviewDTO.getUser(), reviewDTO.getRestaurant());
 
@@ -66,7 +65,7 @@ public class RegisterReviewUseCase {
         }
 
         Review review = new Review();
-        review.setId(reviewDTO.getId()); // Será null para novas avaliações
+        review.setId(reviewDTO.getId());
         review.setUser(user);
         review.setRestaurant(restaurant);
         review.setRating(reviewDTO.getRating());
@@ -74,29 +73,5 @@ public class RegisterReviewUseCase {
         review.setReviewDate(LocalDateTime.now());
 
         return reviewRepository.save(review);
-    }
-
-    public List<Review> findByRestaurantId(Long restaurantId) {
-        if (restaurantId == null) {
-            throw new IllegalArgumentException("ID do restaurante é obrigatório");
-        }
-
-        return reviewRepository.findByRestaurantId(restaurantId);
-    }
-
-    public double calculateAverageRating(Long restaurantId) {
-        if (restaurantId == null) {
-            throw new IllegalArgumentException("ID do restaurante é obrigatório");
-        }
-
-        List<Review> reviews = reviewRepository.findByRestaurantId(restaurantId);
-        if (reviews.isEmpty()) {
-            return 0.0;
-        }
-
-        return reviews.stream()
-                .mapToInt(Review::getRating)
-                .average()
-                .orElse(0.0);
     }
 }

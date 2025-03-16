@@ -24,6 +24,12 @@ public class ReservationDTO {
         this.status = status;
     }
 
+    public ReservationDTO(long l, long l1, long l2, LocalDateTime now, LocalDateTime localDateTime) {
+    }
+
+    public ReservationDTO(long id, long user, long restaurant, LocalDateTime now, LocalDateTime localDateTime, Status status) {
+    }
+
     public Long getId() {
         return id;
     }

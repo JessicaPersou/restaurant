@@ -1,0 +1,8 @@
+//TODO
+
+revisar metodos da implementacao
+testar controllers
+criar payload
+partir testes
+deploy
+criar readme.md

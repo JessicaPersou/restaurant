@@ -3,6 +3,7 @@ package br.com.fiap.postech.restaurant.adapters.controller.dto;
 import br.com.fiap.postech.restaurant.domain.entities.Reservation;
 import br.com.fiap.postech.restaurant.domain.entities.Review;
 import br.com.fiap.postech.restaurant.domain.enums.CuisineType;
+import br.com.fiap.postech.restaurant.domain.valueobjects.OpeningHours;
 
 import java.time.LocalTime;
 import java.util.List;
@@ -12,7 +13,7 @@ public class RestaurantDTO {
     private String name;
     private String location;
     private CuisineType cuisine;
-    private LocalTime openingHours;
+    private List<OpeningHours> openingHours;
     private int capacity;
     private List<Reservation> reservations;
     private List<Review> reviews;
@@ -20,7 +21,7 @@ public class RestaurantDTO {
     public RestaurantDTO() {
     }
 
-    public RestaurantDTO(Long id, String name, String location, CuisineType cuisine, LocalTime openingHours, int capacity, List<Reservation> reservations, List<Review> reviews) {
+    public RestaurantDTO(Long id, String name, String location, CuisineType cuisine, List<OpeningHours> openingHours, int capacity, List<Reservation> reservations, List<Review> reviews) {
         this.id = id;
         this.name = name;
         this.location = location;
@@ -63,11 +64,11 @@ public class RestaurantDTO {
         this.cuisine = cuisine;
     }
 
-    public LocalTime getOpeningHours() {
+    public List<OpeningHours> getOpeningHours() {
         return openingHours;
     }
 
-    public void setOpeningHours(LocalTime openingHours) {
+    public void setOpeningHours(List<OpeningHours> openingHours) {
         this.openingHours = openingHours;
     }
 

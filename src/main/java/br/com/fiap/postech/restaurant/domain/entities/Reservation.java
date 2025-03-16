@@ -12,6 +12,12 @@ public class Reservation {
     private int numberOfPeople;
     private Status status;
 
+    public Reservation(long l, long l1, long l2, LocalDateTime now, LocalDateTime localDateTime) {
+    }
+
+    public Reservation(long id, long l, long l1, LocalDateTime now, LocalDateTime localDateTime, Status status) {
+    }
+
     // Adicionado metodo para verificar se está dentro do horário de funcionamento
     public boolean isWithinBusinessHours() {
         return this.restaurant != null &&
