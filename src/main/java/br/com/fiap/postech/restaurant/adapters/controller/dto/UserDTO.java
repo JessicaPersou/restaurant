@@ -1,32 +1,28 @@
-package br.com.fiap.postech.restaurant.domain.entities;
+package br.com.fiap.postech.restaurant.adapters.controller.dto;
 
-import java.util.ArrayList;
+import br.com.fiap.postech.restaurant.domain.entities.Reservation;
+import br.com.fiap.postech.restaurant.domain.entities.Review;
+
 import java.util.List;
 
-
-public class User {
+public class UserDTO {
     private Long id;
     private String name;
     private String email;
     private String phone;
-    private List<Reservation> reservations = new ArrayList<>();
-    private List<Review> reviews = new ArrayList<>();
+    private List<Reservation> reservations;
+    private List<Review> reviews;
 
-    public User() {
+    public UserDTO() {
     }
 
-    public User(Long id) {
-        this.id = id;
-    }
-
-    public User(Long id, String name, String email, String phone,
-                List<Reservation> reservations, List<Review> reviews) {
+    public UserDTO(Long id, String name, String email, String phone, List<Reservation> reservations, List<Review> reviews) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.phone = phone;
-        this.reservations = reservations != null ? reservations : new ArrayList<>();
-        this.reviews = reviews != null ? reviews : new ArrayList<>();
+        this.reservations = reservations;
+        this.reviews = reviews;
     }
 
     public Long getId() {

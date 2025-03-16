@@ -1,26 +1,24 @@
-package br.com.fiap.postech.restaurant.domain.entities;
+package br.com.fiap.postech.restaurant.adapters.controller.dto;
 
-import java.time.LocalDateTime;
 
-public class Review {
+public class ReviewDTO {
     private Long id;
-    private User user;
-    private Restaurant restaurant;
+    private Long user;
+    private Long restaurant;
     private int rating;
     private String comment;
-    private LocalDateTime reviewDate;
+    private boolean isUpdate;
 
-    public Review() {
+    // Construtores, getters e setters
+    public ReviewDTO() {
     }
 
-    public Review(Long id, User user, Restaurant restaurant,
-                  int rating, String comment, LocalDateTime reviewDate) {
+    public ReviewDTO(Long id, Long user, Long restaurant, int rating, String comment) {
         this.id = id;
         this.user = user;
         this.restaurant = restaurant;
         this.rating = rating;
         this.comment = comment;
-        this.reviewDate = reviewDate;
     }
 
     public Long getId() {
@@ -31,19 +29,19 @@ public class Review {
         this.id = id;
     }
 
-    public User getUser() {
+    public Long getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(Long user) {
         this.user = user;
     }
 
-    public Restaurant getRestaurant() {
+    public Long getRestaurant() {
         return restaurant;
     }
 
-    public void setRestaurant(Restaurant restaurant) {
+    public void setRestaurant(Long restaurant) {
         this.restaurant = restaurant;
     }
 
@@ -63,11 +61,11 @@ public class Review {
         this.comment = comment;
     }
 
-    public LocalDateTime getReviewDate() {
-        return reviewDate;
+    public boolean isUpdate() {
+        return isUpdate;
     }
 
-    public void setReviewDate(LocalDateTime reviewDate) {
-        this.reviewDate = reviewDate;
+    public void setUpdate(boolean update) {
+        isUpdate = update;
     }
 }
